@@ -1,0 +1,64 @@
+from django.contrib import admin
+# from modeltranslation.admin import TranslationAdmin
+
+# from .form import ColorModelForm
+from .models import *
+
+
+# class MyTranslation(TranslationAdmin):
+#     class Media:
+#         js = (
+#             'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+#             'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+#             'modeltranslation/js/tabbed_translation_fields.js',
+#         )
+#         css = {
+#             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+#         }
+@admin.register(CategoryModel)
+class CategoryModelAdmin(admin.ModelAdmin):
+    list_display = ['title', 'created_at']
+    list_filter = ['created_at', ]
+    search_fields = ['title']
+
+#
+# class ProductImageModelAdmin(admin.StackedInline):
+#     model = ProductImageModel
+
+
+@admin.register(ProductTagModel)
+class ProductTagModelAdmin(admin.ModelAdmin):
+    list_display = ['title', 'created_at']
+    list_filter = ['created_at', ]
+    search_fields = ['title']
+
+
+@admin.register(BrandModel)
+class BrandModelAdmin(admin.ModelAdmin):
+    list_display = ['title', 'created_at']
+    list_filter = ['created_at', ]
+    search_fields = ['title']
+
+
+@admin.register(ProductSizeModel)
+class SizeModel(admin.ModelAdmin):
+    list_display = ['title', 'created_at']
+    list_filter = ['created_at', ]
+    search_fields = ['title']
+
+
+@admin.register(ProductColorModel)
+class ColorModel(admin.ModelAdmin):
+    list_display = ['code', 'created_at']
+    list_filter = ['created_at', ]
+    search_fields = ['code']
+
+
+@admin.register(ProductModel)
+class ProductModelAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'discount', 'short_description', 'created_at']
+    list_filter = ['tags', 'brand', 'category', 'created_at']
+    search_fields = ['title', 'short_description']
+    autocomplete_fields = ['category', 'tags', 'brand']
+    # readonly_fields = ['real_price']
+    # inlines = [ProductImageModelAdmin]
